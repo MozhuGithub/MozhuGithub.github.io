@@ -6,15 +6,30 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>浅谈SpringBoot整合Shiro | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。 ​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足">
+<meta name="keywords" content="springboot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈SpringBoot整合Shiro">
+<meta property="og:url" content="http://yoursite.com/2019/07/14/浅谈SpringBoot整合Shiro/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。 ​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xwdzpulsj30om0ewabf.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xwsx3g29j30od03swej.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/007dV4f5ly1g0xx7zccdqj30oh0fcmyk.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xx7zpwb5j30px0av0th.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11i5065t8j30mm0fr75c.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g11i99uw9kj30rg0a93z6.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11io4agslj30p90dhmy2.jpg4f5ly1g11ijqrkbzj30qj0ekdgt.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g11j0lh9vhj30ph04jdg1.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11j0mearuj30oz0bdgmf.jpg">
+<meta property="og:updated_time" content="2019-07-14T08:14:12.648Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="浅谈SpringBoot整合Shiro">
+<meta name="twitter:description" content="​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。 ​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足">
+<meta name="twitter:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xwdzpulsj30om0ewabf.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,16 +165,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-浅谈SpringBoot整合Shiro" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-浅谈SpringBoot整合Shiro" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/14/浅谈SpringBoot整合Shiro/">浅谈SpringBoot整合Shiro</a>
+    <h1 class="article-title" itemprop="name">
+      浅谈SpringBoot整合Shiro
     </h1>
   
 
@@ -174,11 +187,56 @@
       
         <p>​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。</p>
 <p>​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足之处还望谅解。</p>
-        
-          <a class="article-more-a" href="/2019/07/14/浅谈SpringBoot整合Shiro/#more">more >></a>
-        
+<a id="more"></a>
+
+<hr>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><pre><code>首先我们要进行相对应的环境配置，除了相对应的SpringBoot启动器和Web启动器外，还添加了SpringBoot默认模板引擎Thymeleaf的相应配置，因为我用的是SpringBoot1.5.19的版本而不是2.0所以thymeleaf默认的是2.0版本，thymeleaf-layout默认是1.0，我们需要将thymeleaf版本改成3.0和其thymeleaf相对应的2.0版本，如图所示</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xwdzpulsj30om0ewabf.jpg" alt="img"></p>
+<p>​    重点是Shiro，使用版本是1.4.0</p>
+<p><img src="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xwsx3g29j30od03swej.jpg" alt="img"></p>
+<h3 id="Shiro配置"><a href="#Shiro配置" class="headerlink" title="Shiro配置"></a>Shiro配置</h3><p>​    shiro配置主要包含三步:</p>
+<p>​    1.创建ShiroFilterFacoryBean</p>
+<p>​    2.创建DefaultWebSecurityManager</p>
+<p>​    3.创建自定义的Realm类，Shiro会从Realm类中进行认证逻辑和授权逻辑的处理</p>
+<p><img src="http://wx2.sinaimg.cn/mw690/007dV4f5ly1g0xx7zccdqj30oh0fcmyk.jpg" alt="img"></p>
+<p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xx7zpwb5j30px0av0th.jpg" alt="img"></p>
+<h3 id="登陆认证"><a href="#登陆认证" class="headerlink" title="登陆认证"></a>登陆认证</h3><p>​    shiro登陆认证也是分为三步：</p>
+<p>​    1.通过SecurityUtils获取subject对象</p>
+<p>​    2.封装当前登陆用户的账号密码</p>
+<p>​    3.执行登陆方法通过抛出shiro封装好的异常来确定登陆状态</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11i5065t8j30mm0fr75c.jpg" alt="img"></p>
+<h3 id="执行登陆认证"><a href="#执行登陆认证" class="headerlink" title="执行登陆认证"></a>执行登陆认证</h3><p>​    通过认证出来的token对象取出登陆用户的信息，并判断该用户的状态,如果不存在则直接返回空，</p>
+<p>shiro抛出用户名不存在的异常，然后直接返回一个AuthenticationInfo的实现类，我们这里直接返回一个SimpleAuthenticationInfo就行了，将从数据库取出来封装了所有相关属性的user和密码返回就行，shirp会帮我们进行密码校验。</p>
+<p><img src="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g11i99uw9kj30rg0a93z6.jpg" alt="img"></p>
+<h3 id="执行授权逻辑"><a href="#执行授权逻辑" class="headerlink" title="执行授权逻辑"></a>执行授权逻辑</h3><p>​    创建一个SimpleAuthorziationInfo对象，将当前用户的角色以及对应的权限通过addRoles或者addStringPermissions方法加入Info。因为用户角色权限的关系需要根据实际情况来选择，图中给了点示例，可以参考，最后将info对象返回。</p>
+<p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11io4agslj30p90dhmy2.jpg4f5ly1g11ijqrkbzj30qj0ekdgt.jpg" alt="img"></p>
+<h3 id="shiro标签"><a href="#shiro标签" class="headerlink" title="shiro标签"></a>shiro标签</h3><p>​    以上已经完成了简单的权限控制，想在界面更好的优化（比如隐藏相应的资源）可以通过shiro的标签来进行操作，需要导入额外的依赖thymeleaf-extras-shiro，html头文件也需要做相应的声明，以下举例两个简单的shiro标签</p>
+<p><img src="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g11j0lh9vhj30ph04jdg1.jpg" alt="img"></p>
+<p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11j0mearuj30oz0bdgmf.jpg" alt="img"></p>
+<h3 id="写在末尾的话"><a href="#写在末尾的话" class="headerlink" title="写在末尾的话"></a>写在末尾的话</h3><p>​    第一次写博客第一次用shiro，不论是技术还是博客都很粗糙，我依然很菜，希望大家学习顺利，成为大牛。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -198,16 +256,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/14/浅谈SpringBoot整合Shiro/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/14/浅谈SpringBoot整合Shiro/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/14/Hexo实现个人技术博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hexo实现个人技术博客</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -227,84 +344,14 @@
 
 
 
-
   
-    <article id="post-Hexo实现个人技术博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/14/Hexo实现个人技术博客/">Hexo实现个人技术博客</a>
-    </h1>
   
 
-        
-        <a href="/2019/07/14/Hexo实现个人技术博客/" class="archive-article-date">
-  	<time datetime="2019-07-14T08:05:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>​    <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener"> Hexo(中文官方网站)</a>是一个快速，简洁且高效的博客框架，让上百个页面在几秒内瞬间完成渲染。 <code>Hexo</code>支持<code>Github Flavored Markdown</code>的所有功能， 甚至可以整合<code>Octopress</code>的大多数插件。 并自己也拥有强大的插件系统。</p>
-        
-          <a class="article-more-a" href="/2019/07/14/Hexo实现个人技术博客/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/14/Hexo实现个人技术博客/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  
 
   
+
   
 
 
@@ -327,8 +374,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
