@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>SpringBoot配置静态资源映射 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
+  <meta name="description" content="​    SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
 <meta name="keywords" content="springboot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot配置静态资源映射">
 <meta property="og:url" content="http://yoursite.com/2019/07/26/SpringBoot配置静态资源映射/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
+<meta property="og:description" content="​    SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-27T12:31:11.890Z">
+<meta property="og:updated_time" content="2019-07-27T12:55:38.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot配置静态资源映射">
-<meta name="twitter:description" content="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
+<meta name="twitter:description" content="​    SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -175,7 +175,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。"><a href="#SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。" class="headerlink" title="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。"></a>SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。</h4><a id="more"></a>
+        <p>​    <strong>SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。</strong></p>
+<a id="more"></a>
 
 <p>​    在SpringBoot中打包成jar项目时，静态页面和css放置的目录有规定。在SpringBoot中相关配置在WebMvcAutoConfiguration接口中。通过这个分析所有/webjars/**都去classpath:/META-INF/resources/webjars/找资源。所谓的webjars是指以jar包的方式引入资源。</p>
 <p>​    一般通过实现这个接口实现addResourceHandlers方法来设置资源映射，如图所示，springboot常用的static包下的静态文件映射就是这么做的。ResourceHandlerRegistry类负责储存资源文件的注册，将需要添加的请求路径注册进去并为其添加映射路径。（static/**代表所有static下的所有请求）        </p>
