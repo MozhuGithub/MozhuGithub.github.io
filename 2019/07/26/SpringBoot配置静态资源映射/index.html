@@ -6,30 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>浅谈SpringBoot整合Shiro | Hexo</title>
+  <title>SpringBoot配置静态资源映射 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。 ​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足">
+  <meta name="description" content="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
 <meta name="keywords" content="springboot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈SpringBoot整合Shiro">
-<meta property="og:url" content="http://yoursite.com/2019/07/14/浅谈SpringBoot整合Shiro/index.html">
+<meta property="og:title" content="SpringBoot配置静态资源映射">
+<meta property="og:url" content="http://yoursite.com/2019/07/26/SpringBoot配置静态资源映射/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。 ​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足">
+<meta property="og:description" content="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xwdzpulsj30om0ewabf.jpg">
-<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xwsx3g29j30od03swej.jpg">
-<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/007dV4f5ly1g0xx7zccdqj30oh0fcmyk.jpg">
-<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xx7zpwb5j30px0av0th.jpg">
-<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11i5065t8j30mm0fr75c.jpg">
-<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g11i99uw9kj30rg0a93z6.jpg">
-<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11io4agslj30p90dhmy2.jpg4f5ly1g11ijqrkbzj30qj0ekdgt.jpg">
-<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g11j0lh9vhj30ph04jdg1.jpg">
-<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11j0mearuj30oz0bdgmf.jpg">
-<meta property="og:updated_time" content="2019-07-14T08:19:35.521Z">
+<meta property="og:updated_time" content="2019-07-27T12:31:11.890Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈SpringBoot整合Shiro">
-<meta name="twitter:description" content="​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。 ​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足">
-<meta name="twitter:image" content="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xwdzpulsj30om0ewabf.jpg">
+<meta name="twitter:title" content="SpringBoot配置静态资源映射">
+<meta name="twitter:description" content="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -165,55 +155,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-浅谈SpringBoot整合Shiro" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-SpringBoot配置静态资源映射" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      浅谈SpringBoot整合Shiro
+      SpringBoot配置静态资源映射
     </h1>
   
 
         
-        <a href="/2019/07/14/浅谈SpringBoot整合Shiro/" class="archive-article-date">
-  	<time datetime="2019-07-14T08:07:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-14</time>
+        <a href="/2019/07/26/SpringBoot配置静态资源映射/" class="archive-article-date">
+  	<time datetime="2019-07-26T00:56:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。</p>
-<p>​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足之处还望谅解。</p>
-<a id="more"></a>
+        <h4 id="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。"><a href="#SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。" class="headerlink" title="SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。"></a>SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。</h4><a id="more"></a>
 
-<hr>
-<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><pre><code>首先我们要进行相对应的环境配置，除了相对应的SpringBoot启动器和Web启动器外，还添加了SpringBoot默认模板引擎Thymeleaf的相应配置，因为我用的是SpringBoot1.5.19的版本而不是2.0所以thymeleaf默认的是2.0版本，thymeleaf-layout默认是1.0，我们需要将thymeleaf版本改成3.0和其thymeleaf相对应的2.0版本，如图所示</code></pre><p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xwdzpulsj30om0ewabf.jpg" alt="img"></p>
-<p>​    重点是Shiro，使用版本是1.4.0</p>
-<p><img src="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xwsx3g29j30od03swej.jpg" alt="img"></p>
-<h3 id="Shiro配置"><a href="#Shiro配置" class="headerlink" title="Shiro配置"></a>Shiro配置</h3><p>​    shiro配置主要包含三步:</p>
-<p>​    1.创建ShiroFilterFacoryBean</p>
-<p>​    2.创建DefaultWebSecurityManager</p>
-<p>​    3.创建自定义的Realm类，Shiro会从Realm类中进行认证逻辑和授权逻辑的处理</p>
-<p><img src="http://wx2.sinaimg.cn/mw690/007dV4f5ly1g0xx7zccdqj30oh0fcmyk.jpg" alt="img"></p>
-<p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g0xx7zpwb5j30px0av0th.jpg" alt="img"></p>
-<h3 id="登陆认证"><a href="#登陆认证" class="headerlink" title="登陆认证"></a>登陆认证</h3><p>​    shiro登陆认证也是分为三步：</p>
-<p>​    1.通过SecurityUtils获取subject对象</p>
-<p>​    2.封装当前登陆用户的账号密码</p>
-<p>​    3.执行登陆方法通过抛出shiro封装好的异常来确定登陆状态</p>
-<p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11i5065t8j30mm0fr75c.jpg" alt="img"></p>
-<h3 id="执行登陆认证"><a href="#执行登陆认证" class="headerlink" title="执行登陆认证"></a>执行登陆认证</h3><p>​    通过认证出来的token对象取出登陆用户的信息，并判断该用户的状态,如果不存在则直接返回空，</p>
-<p>shiro抛出用户名不存在的异常，然后直接返回一个AuthenticationInfo的实现类，我们这里直接返回一个SimpleAuthenticationInfo就行了，将从数据库取出来封装了所有相关属性的user和密码返回就行，shirp会帮我们进行密码校验。</p>
-<p><img src="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g11i99uw9kj30rg0a93z6.jpg" alt="img"></p>
-<h3 id="执行授权逻辑"><a href="#执行授权逻辑" class="headerlink" title="执行授权逻辑"></a>执行授权逻辑</h3><p>​    创建一个SimpleAuthorziationInfo对象，将当前用户的角色以及对应的权限通过addRoles或者addStringPermissions方法加入Info。因为用户角色权限的关系需要根据实际情况来选择，图中给了点示例，可以参考，最后将info对象返回。</p>
-<p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11io4agslj30p90dhmy2.jpg4f5ly1g11ijqrkbzj30qj0ekdgt.jpg" alt="img"></p>
-<h3 id="shiro标签"><a href="#shiro标签" class="headerlink" title="shiro标签"></a>shiro标签</h3><p>​    以上已经完成了简单的权限控制，想在界面更好的优化（比如隐藏相应的资源）可以通过shiro的标签来进行操作，需要导入额外的依赖thymeleaf-extras-shiro，html头文件也需要做相应的声明，以下举例两个简单的shiro标签</p>
-<p><img src="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g11j0lh9vhj30ph04jdg1.jpg" alt="img"></p>
-<p><img src="http://wx3.sinaimg.cn/mw690/007dV4f5ly1g11j0mearuj30oz0bdgmf.jpg" alt="img"></p>
-<h3 id="写在末尾的话"><a href="#写在末尾的话" class="headerlink" title="写在末尾的话"></a>写在末尾的话</h3><p>​    第一次写博客第一次用shiro，不论是技术还是博客都很粗糙，我依然很菜，希望大家学习顺利，成为大牛。</p>
+<p>​    在SpringBoot中打包成jar项目时，静态页面和css放置的目录有规定。在SpringBoot中相关配置在WebMvcAutoConfiguration接口中。通过这个分析所有/webjars/**都去classpath:/META-INF/resources/webjars/找资源。所谓的webjars是指以jar包的方式引入资源。</p>
+<p>​    一般通过实现这个接口实现addResourceHandlers方法来设置资源映射，如图所示，springboot常用的static包下的静态文件映射就是这么做的。ResourceHandlerRegistry类负责储存资源文件的注册，将需要添加的请求路径注册进去并为其添加映射路径。（static/**代表所有static下的所有请求）        </p>
+<p>​                    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OisWebMvcConfigurerAdapter</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>​    开发时经常会为上传图片做静态资源映射到服务器指定的地方，我们简单的映射到F:/upload/下，如图所示。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OisWebMvcConfigurerAdapter</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">		registry.addResourceHandler(<span class="string">"/static/**"</span>).addResourceLocations(<span class="string">"classpath:/static/"</span>);</span><br><span class="line">		<span class="comment">//图片上传路径</span></span><br><span class="line">		registry.addResourceHandler(<span class="string">"/upload/**"</span>).addResourceLocations(<span class="string">"file:F:/upload/"</span>);</span><br><span class="line">		WebMvcConfigurer.<span class="keyword">super</span>.addResourceHandlers(registry);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    这样我们就能通过upload的请求找到对应的资源了。</p>
+<p>​    然而不可能就这样将资源映射写死，每一次使用的时候都拼接完整的请求路径，所以我们会在配置文件中设定好路径映射，需要时通过@value将属性赋值使用，如图所示。也能使用@ConfigurationProperties在类上标识直接指定多个属性，就不多演示了。                    </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上传的映射</span></span><br><span class="line"><span class="attr">uploads:</span></span><br><span class="line"><span class="attr">  user_img_path:</span> <span class="attr">F:/upload/</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OisWebMvcConfigurerAdapter</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;uploads.user_img_path&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String user_img_path;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">		registry.addResourceHandler(<span class="string">"/static/**"</span>).addResourceLocations(<span class="string">"classpath:/static/"</span>);</span><br><span class="line">		<span class="comment">//图片上传路径</span></span><br><span class="line">		registry.addResourceHandler(<span class="string">"/upload/**"</span>).addResourceLocations(<span class="string">"file:"</span>+user_img_path);</span><br><span class="line">		WebMvcConfigurer.<span class="keyword">super</span>.addResourceHandlers(registry);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上只是第一种方式，常用的还有一种在配置文件中通过spring.resources.static-locations直接进行配置，如图。</p>
+<p>​    </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mvc:</span></span><br><span class="line"><span class="attr">  static-path-pattern:</span> <span class="string">/upload/**</span></span><br><span class="line"><span class="attr">  resources:</span></span><br><span class="line"><span class="attr">    static-locations:</span> <span class="attr">classpath:/META-</span> <span class="string">INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:/home/upload/</span></span><br></pre></td></tr></table></figure>
+
+<p>​                        </p>
+<p>不能在staic-locations下只配置upload请求的映射，至少也要添加classpath:/static/ 不然存放再这个包下的如css,js的文件会获取不到。</p>
+<h4 id="博主水平有限，仍然在学习中，如有不足之处，请帮忙指正，感激不尽。"><a href="#博主水平有限，仍然在学习中，如有不足之处，请帮忙指正，感激不尽。" class="headerlink" title="博主水平有限，仍然在学习中，如有不足之处，请帮忙指正，感激不尽。"></a>博主水平有限，仍然在学习中，如有不足之处，请帮忙指正，感激不尽。</h4>
       
 
       
@@ -303,7 +287,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/14/浅谈SpringBoot整合Shiro/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/26/SpringBoot配置静态资源映射/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -317,18 +301,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/07/26/SpringBoot配置静态资源映射/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          SpringBoot配置静态资源映射
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/07/14/Hexo实现个人技术博客/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hexo实现个人技术博客</div>
+    <a href="/2019/07/14/浅谈SpringBoot整合Shiro/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浅谈SpringBoot整合Shiro</div>
       <i class="icon-circle-right"></i>
     </a>
   
