@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>SpringBoot配置静态资源映射 | Hexo</title>
+  <title>Tag: ribbon | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="​    SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
-<meta name="keywords" content="springboot">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot配置静态资源映射">
-<meta property="og:url" content="http://yoursite.com/2019/07/26/SpringBoot配置静态资源映射/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/tags/ribbon/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="​    SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-27T12:59:39.524Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringBoot配置静态资源映射">
-<meta name="twitter:description" content="​    SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。">
+<meta name="twitter:title" content="Hexo">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -155,199 +150,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-SpringBoot配置静态资源映射" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      SpringBoot配置静态资源映射
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/08/04/初识SpringCloud-第二篇/" class="archive-article-date">
+  	<time datetime="2019-08-04T02:50:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-04</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/08/04/初识SpringCloud-第二篇/">初识SpringCloud|第二篇</a>
     </h1>
   
 
-        
-        <a href="/2019/07/26/SpringBoot配置静态资源映射/" class="archive-article-date">
-  	<time datetime="2019-07-26T00:56:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>​    SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。</p>
-<a id="more"></a>
-
-<hr>
-<p>​    在SpringBoot中打包成jar项目时，静态页面和css放置的目录有规定。在SpringBoot中相关配置在WebMvcAutoConfiguration接口中。通过这个分析所有/webjars/**都去classpath:/META-INF/resources/webjars/找资源。所谓的webjars是指以jar包的方式引入资源。</p>
-<p>​    一般通过实现这个接口实现addResourceHandlers方法来设置资源映射，如图所示，springboot常用的static包下的静态文件映射就是这么做的。ResourceHandlerRegistry类负责储存资源文件的注册，将需要添加的请求路径注册进去并为其添加映射路径。（static/**代表所有static下的所有请求）        </p>
-<p>​                    </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OisWebMvcConfigurerAdapter</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    开发时经常会为上传图片做静态资源映射到服务器指定的地方，我们简单的映射到F:/upload/下，如图所示。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OisWebMvcConfigurerAdapter</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">		registry.addResourceHandler(<span class="string">"/static/**"</span>).addResourceLocations(<span class="string">"classpath:/static/"</span>);</span><br><span class="line">		<span class="comment">//图片上传路径</span></span><br><span class="line">		registry.addResourceHandler(<span class="string">"/upload/**"</span>).addResourceLocations(<span class="string">"file:F:/upload/"</span>);</span><br><span class="line">		WebMvcConfigurer.<span class="keyword">super</span>.addResourceHandlers(registry);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>​    这样我们就能通过upload的请求找到对应的资源了。</p>
-<p>​    然而不可能就这样将资源映射写死，每一次使用的时候都拼接完整的请求路径，所以我们会在配置文件中设定好路径映射，需要时通过@value将属性赋值使用，如图所示。也能使用@ConfigurationProperties在类上标识直接指定多个属性，就不多演示了。                    </p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#上传的映射</span></span><br><span class="line"><span class="attr">uploads:</span></span><br><span class="line"><span class="attr">  user_img_path:</span> <span class="attr">F:/upload/</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OisWebMvcConfigurerAdapter</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;uploads.user_img_path&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String user_img_path;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">		registry.addResourceHandler(<span class="string">"/static/**"</span>).addResourceLocations(<span class="string">"classpath:/static/"</span>);</span><br><span class="line">		<span class="comment">//图片上传路径</span></span><br><span class="line">		registry.addResourceHandler(<span class="string">"/upload/**"</span>).addResourceLocations(<span class="string">"file:"</span>+user_img_path);</span><br><span class="line">		WebMvcConfigurer.<span class="keyword">super</span>.addResourceHandlers(registry);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上只是第一种方式，常用的还有一种在配置文件中通过spring.resources.static-locations直接进行配置，如图。</p>
-<p>​    </p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mvc:</span></span><br><span class="line"><span class="attr">  static-path-pattern:</span> <span class="string">/upload/**</span></span><br><span class="line"><span class="attr">  resources:</span></span><br><span class="line"><span class="attr">    static-locations:</span> <span class="attr">classpath:/META-</span> <span class="string">INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:/home/upload/</span></span><br></pre></td></tr></table></figure>
-
-<p>​                        </p>
-<p>不能在staic-locations下只配置upload请求的映射，至少也要添加classpath:/static/ 不然存放再这个包下的如css,js的文件会获取不到。</p>
-<h4 id="博主水平有限，仍然在学习中，如有不足之处，请帮忙指正，感激不尽。"><a href="#博主水平有限，仍然在学习中，如有不足之处，请帮忙指正，感激不尽。" class="headerlink" title="博主水平有限，仍然在学习中，如有不足之处，请帮忙指正，感激不尽。"></a>博主水平有限，仍然在学习中，如有不足之处，请帮忙指正，感激不尽。</h4>
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">springboot</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">springcloud</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">eureka</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ribbon</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/26/SpringBoot配置静态资源映射/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/08/03/初识SpringCloud-第一篇/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          初识SpringCloud|第一篇
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/07/14/浅谈SpringBoot整合Shiro/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">浅谈SpringBoot整合Shiro</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -370,9 +234,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
