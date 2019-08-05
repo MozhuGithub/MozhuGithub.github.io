@@ -172,7 +172,53 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>​    在微服务架构中，业务被分为一个个微小的服务，服务和服务之间可以相互调用(RPC)，为保证高可用性，单个服务通常会集群部署，由于网络或者其他众多原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会陷入线程阻塞的状态，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。为了解决这个问题，业界提出了”断路器”模型。</p>
+<h3 id="一、断路器简介"><a href="#一、断路器简介" class="headerlink" title="一、断路器简介"></a>一、断路器简介</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Netflix has created a library called Hystrix that implements the circuit breaker pattern. In a microservice architecture it is common to have multiple layers of service calls.</span><br><span class="line"> ----摘自官网</span><br></pre></td></tr></table></figure>
+
+<p>​    Netflix开源了Hystrix组件，实现了断路器模式，SpringCloud对这一组件进行了整合。 在微服务架构中，一个请求需要调用多个服务是非常常见的，如下图：</p>
+<p><img src="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g5ov4e4nwlj30go0axzlb.jpg" alt="img"></p>
+<p>​    较底层的服务如果出现故障，会导致连锁故障。当对特定的服务的调用的不可用达到一个阀值（Hystric 是5秒20次） 断路器将会被打开。</p>
+<p><img src="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g5ov4ixdd5j30go0axmyd.jpg" alt="img"></p>
+<h3 id="二、准备工作"><a href="#二、准备工作" class="headerlink" title="二、准备工作"></a>二、准备工作</h3><p>​    这篇文章基于上一篇文章的工程，首先启动上一篇文章的工程，启动eureka-server 工程；启动eureka-client工程，它的端口为8763。</p>
+<h3 id="三、在Ribbon使用熔断器"><a href="#三、在Ribbon使用熔断器" class="headerlink" title="三、在Ribbon使用熔断器"></a>三、在Ribbon使用熔断器</h3><p>​    改进eureka-ribbon工程，在pom文件中加入Hystrix依赖。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>​    工程启动类Application上添加注解@EnableHystrix注解开启Hystrix。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableEurekaClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableHystrix</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaRibbonApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(EurekaRibbonApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="function">RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    改造HelloService类，在hiService方法上加上@HystrixCommand注解。该注解对该方法创建了熔断器的功能，并指定了fallbackMethod熔断方法，熔断方法直接返回了一个字符串，字符串为”hi”+name+”error”;，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@HystrixCommand</span>(fallbackMethod = <span class="string">"hiError"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiService</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> restTemplate.getForObject(<span class="string">"http://EUREKA-CLIENT/hi?name="</span>+name,String.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hiError</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"hi "</span>+name+<span class="string">" error"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    启动 eureka-ribbon 工程，当我们访问<a href="http://localhost:8764/hi?name=kn,浏览器显示：" target="_blank" rel="noopener">http://localhost:8764/hi?name=kn,浏览器显示：</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hi kn,i am from port:8763</span><br></pre></td></tr></table></figure>
+
+<p>​    此时关闭 eureka-client工程，当我们再访问<a href="http://localhost:8764/hi?name=forezp，浏览器会显示：" target="_blank" rel="noopener">http://localhost:8764/hi?name=forezp，浏览器会显示：</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hi kn error</span><br></pre></td></tr></table></figure>
+
+<p>​    这就说明当 eureka-client 工程不可用的时候，eureka-ribbon调用 eureka-client的API接口时，会执行快速失败，直接返回一组字符串，而不是等待响应超时，这很好的控制了容器的线程阻塞。</p>
+<h3 id="四、Feign中使用断路器"><a href="#四、Feign中使用断路器" class="headerlink" title="四、Feign中使用断路器"></a>四、Feign中使用断路器</h3><p>​    Feign是自带断路器的，在D版本的Spring Cloud之后，它没有默认打开。需要在配置文件中配置打开它，在配置文件加以下代码：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line"><span class="attr">  hystrix:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>​    这里我输入hystrix，自动的输出了：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hystrix:</span></span><br><span class="line"><span class="attr">  metrics:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>​    这导致了我的第一次运行失败。hystrix.metrics.enabled是属于SpringCloud-Hystrix的属性而我这里使用的是Feign客户端，所以应该启用feign.hystrix.enabled的属性。</p>
+<p>​    对eureka-feign进行改造，只需要在FeignClient的FeignServiceClient接口的注解中加上fallback的指定类就行了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"eureka-client"</span>,fallback = FeignServerHystrix.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FeignServiceClient</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>( <span class="string">"/hi"</span>)</span><br><span class="line">    <span class="function">String <span class="title">sayHiFromClientOne</span><span class="params">(@RequestParam(value = <span class="string">"name"</span>)</span> String name)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    FeignServerHystrix需要实现FeignServiceClient接口并加入容器中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FeignServerHystrix</span> <span class="keyword">implements</span> <span class="title">FeignServiceClient</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHiFromClientOne</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"sorry,error,"</span>+name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    启动eureka-sevice，启动eureka-client，启动eureka-feign，在浏览器输入<a href="http://localhost:8765/hi?name=kn，会显示：" target="_blank" rel="noopener">http://localhost:8765/hi?name=kn，会显示：</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hi kn,i am from port:8763</span><br></pre></td></tr></table></figure>
+
+<p>​    停掉eureka-client服务，再次访问，浏览器会出现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorry,error,kn</span><br></pre></td></tr></table></figure>
+
+<p>​    这说明断路器起到了作用。</p>
+<h3 id="四、结尾"><a href="#四、结尾" class="headerlink" title="四、结尾"></a>四、结尾</h3><p>​    feign开启熔断之后，FeignServerHystrix会要重写接口的所有方法，而Ribbon似乎更加灵活，只需要在注解上增加fallbackmethod指定方法即可，现在看来两者各有好处。一步步的解决Bug运行成功时令人开心的，还式要继续努力啊。</p>
+<p>​    最后附上大牛原文链接：<a href="http://blog.csdn.net/forezp/article/details/81040990" target="_blank" rel="noopener">http://blog.csdn.net/forezp/article/details/81040990</a></p>
+
       
 
       
@@ -796,10 +842,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -808,15 +850,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">feign</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eureka</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">ribbon</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">feign</a>
               </li>
              
               <li class="article-tag-list-item">
