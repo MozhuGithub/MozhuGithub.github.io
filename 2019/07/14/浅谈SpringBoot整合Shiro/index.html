@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -110,7 +117,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -270,19 +277,19 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">浅谈SpringBoot整合Shiro</h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -296,39 +303,39 @@
                 2019-07-14
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         <p>​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。</p>
 <p>​    这一次我们只谈谈简单使用，包括认证和授权，不考虑其源码和深层次的东西。我也只是第一次使用测试，想做个记录，有很多不足之处还望谅解。</p>
@@ -364,26 +371,44 @@
     
     
     
-
     
-
     
-
     
+    
+    
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Kn
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/07/14/浅谈SpringBoot整合Shiro/" title="浅谈SpringBoot整合Shiro">http://yoursite.com/2019/07/14/浅谈SpringBoot整合Shiro/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
+      </div>
+    
+    
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/springboot/" rel="tag"># springboot</a>
+            <a href="/tags/springboot/" rel="tag"><i class="fa fa-tag"></i> springboot</a>
           
         </div>
       
-
+    
       
       
       
-
+    
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
@@ -393,9 +418,9 @@
               </a>
             
           </div>
-
+    
           <span class="post-nav-divider"></span>
-
+    
           <div class="post-nav-prev post-nav-item">
             
               <a href="/2019/07/26/SpringBoot配置静态资源映射/" rel="prev" title="SpringBoot配置静态资源映射">
@@ -405,7 +430,7 @@
           </div>
         </div>
       
-
+    
       
       
     </footer>
@@ -622,6 +647,8 @@
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
     
@@ -775,7 +802,17 @@
 
   
 
+
+<!-- 雪花特效 -->
+<script type="text/javascript">
+  var windowWidth = $(window).width();
+  if (windowWidth > 480) {
+    document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+  }
+</script>
+
   <!-- 代码块复制功能 -->
+
 <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
 <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
 </body>

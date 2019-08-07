@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -95,7 +102,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -256,21 +263,21 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2019/08/05/初识SpringCloud-第四篇/" itemprop="url">初识SpringCloud|第四篇|Hystrix</a></h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -284,39 +291,39 @@
                 2019-08-05
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         
           <p>​    在微服务架构中，业务被分为一个个微小的服务，服务和服务之间可以相互调用(RPC)，为保证高可用性，单个服务通常会集群部署，由于网络或者其他众多原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会陷入线程阻塞的状态，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。为了解决这个问题，业界提出了”断路器”模型。</p>
@@ -333,20 +340,20 @@
     
     
     
-
     
-
     
-
     
-
+    
+    
+    
+    
     <footer class="post-footer">
       
-
+    
       
-
+    
       
-
+    
       
       
         <div class="post-eof"></div>
@@ -380,21 +387,21 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2019/08/05/初识SpringCloud-第三篇/" itemprop="url">初识SpringCloud|第三篇|Feign</a></h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -408,39 +415,39 @@
                 2019-08-05
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         
           <p>​    服务消费者还有一种落地实现是Feign，Feign是一个声明式的伪Http客户端，它使得写Http客户端变得更简单。使用Feign，只需要创建一个接口并注解。Feign默认集成了Ribbon，并和Eureka结合，默认实现了负载均衡的效果，并且整合了Hystrix，具有熔断的能力。</p>
@@ -457,20 +464,20 @@
     
     
     
-
     
-
     
-
     
-
+    
+    
+    
+    
     <footer class="post-footer">
       
-
+    
       
-
+    
       
-
+    
       
       
         <div class="post-eof"></div>
@@ -504,21 +511,21 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2019/08/04/初识SpringCloud-第二篇/" itemprop="url">初识SpringCloud|第二篇|Ribbon</a></h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -532,39 +539,39 @@
                 2019-08-04
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         
           <p>​    在微服务架构中，业务被拆分成一个个独立的服务，各个服务之间一般通过Restful Api进行通讯。Spring cloud有两种服务调用方式，一种是ribbon+restTemplate，另一种是feign。在这一篇文章首先讲解下基于ribbon+rest。</p>
@@ -581,20 +588,20 @@
     
     
     
-
     
-
     
-
     
-
+    
+    
+    
+    
     <footer class="post-footer">
       
-
+    
       
-
+    
       
-
+    
       
       
         <div class="post-eof"></div>
@@ -628,21 +635,21 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2019/08/03/初识SpringCloud-第一篇/" itemprop="url">初识SpringCloud|第一篇|Eureka</a></h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -656,39 +663,39 @@
                 2019-08-03
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         
           <p>​        SpringCloud是微服务的一站式解决方案，为开发人员提供了快速构建分布式系统的一些工具，包括配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等等。</p>
@@ -706,20 +713,20 @@
     
     
     
-
     
-
     
-
     
-
+    
+    
+    
+    
     <footer class="post-footer">
       
-
+    
       
-
+    
       
-
+    
       
       
         <div class="post-eof"></div>
@@ -753,21 +760,21 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2019/07/26/SpringBoot配置静态资源映射/" itemprop="url">SpringBoot配置静态资源映射</a></h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -781,39 +788,39 @@
                 2019-07-26
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         
           <p>​    SpringBoot打包成jar项目时，HTML页面和CSS等静态资源得放置目录是由规定的。开发中一些需要上传的资源如图片，通常我们会配置资源映射，将其存放在服务器的某个文件夹下。</p>
@@ -830,20 +837,20 @@
     
     
     
-
     
-
     
-
     
-
+    
+    
+    
+    
     <footer class="post-footer">
       
-
+    
       
-
+    
       
-
+    
       
       
         <div class="post-eof"></div>
@@ -877,21 +884,21 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2019/07/14/浅谈SpringBoot整合Shiro/" itemprop="url">浅谈SpringBoot整合Shiro</a></h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -905,39 +912,39 @@
                 2019-07-14
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         
           <p>​     Shiro是一个简单的安全框架，主要功能有认证，授权，加密，会话管理，Web集成，缓存等。对比起来Spring Security，可能没有Spring Security功能强大，但是在实际工作中并不需要那么复杂的东西，所以简单的Shrio对于我们来说就足够了。</p>
@@ -955,20 +962,20 @@
     
     
     
-
     
-
     
-
     
-
+    
+    
+    
+    
     <footer class="post-footer">
       
-
+    
       
-
+    
       
-
+    
       
       
         <div class="post-eof"></div>
@@ -1002,21 +1009,21 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">
                 
                 <a class="post-title-link" href="/2019/07/14/Hexo实现个人技术博客/" itemprop="url">Hexo实现个人技术博客</a></h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -1030,39 +1037,39 @@
                 2019-07-14
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         
           <p>​    <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener"> Hexo(中文官方网站)</a>是一个快速，简洁且高效的博客框架，让上百个页面在几秒内瞬间完成渲染。 <code>Hexo</code>支持<code>Github Flavored Markdown</code>的所有功能， 甚至可以整合<code>Octopress</code>的大多数插件。 并自己也拥有强大的插件系统。</p>
@@ -1079,20 +1086,20 @@
     
     
     
-
     
-
     
-
     
-
+    
+    
+    
+    
     <footer class="post-footer">
       
-
+    
       
-
+    
       
-
+    
       
       
         <div class="post-eof"></div>
@@ -1281,6 +1288,8 @@
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
     
@@ -1430,7 +1439,17 @@
 
   
 
+
+<!-- 雪花特效 -->
+<script type="text/javascript">
+  var windowWidth = $(window).width();
+  if (windowWidth > 480) {
+    document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+  }
+</script>
+
   <!-- 代码块复制功能 -->
+
 <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
 <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
 </body>

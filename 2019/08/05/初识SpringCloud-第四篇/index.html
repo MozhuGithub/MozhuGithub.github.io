@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -103,7 +110,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -263,19 +270,19 @@
       <meta itemprop="description" content>
       <meta itemprop="image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g0xtbdtal7j30hs0hsdgz.jpg">
     </span>
-
+    
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Kn's Blog">
     </span>
-
+    
     
       <header class="post-header">
-
+    
         
         
           <h1 class="post-title" itemprop="name headline">初识SpringCloud|第四篇|Hystrix</h1>
         
-
+    
         <div class="post-meta">
           <span class="post-time">
             
@@ -289,39 +296,39 @@
                 2019-08-05
               </time>
             
-
+    
             
-
+    
             
           </span>
-
+    
           
-
+    
           
             
           
-
+    
           
           
-
+    
           
-
+    
           
-
+    
           
-
+    
         </div>
       </header>
     
-
+    
     
     
     
     <div class="post-body" itemprop="articleBody">
-
+    
       
       
-
+    
       
         <p>​    在微服务架构中，业务被分为一个个微小的服务，服务和服务之间可以相互调用(RPC)，为保证高可用性，单个服务通常会集群部署，由于网络或者其他众多原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会陷入线程阻塞的状态，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。为了解决这个问题，业界提出了”断路器”模型。</p>
 <a id="more"></a>
@@ -377,28 +384,46 @@
     
     
     
-
     
-
     
-
     
+    
+    
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Kn
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/08/05/初识SpringCloud-第四篇/" title="初识SpringCloud|第四篇|Hystrix">http://yoursite.com/2019/08/05/初识SpringCloud-第四篇/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 
+      </div>
+    
+    
     <footer class="post-footer">
       
         <div class="post-tags">
           
-            <a href="/tags/springcloud/" rel="tag"># springcloud</a>
+            <a href="/tags/springcloud/" rel="tag"><i class="fa fa-tag"></i> springcloud</a>
           
-            <a href="/tags/hystrix/" rel="tag"># hystrix</a>
+            <a href="/tags/hystrix/" rel="tag"><i class="fa fa-tag"></i> hystrix</a>
           
         </div>
       
-
+    
       
       
       
-
+    
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
@@ -408,15 +433,15 @@
               </a>
             
           </div>
-
+    
           <span class="post-nav-divider"></span>
-
+    
           <div class="post-nav-prev post-nav-item">
             
           </div>
         </div>
       
-
+    
       
       
     </footer>
@@ -633,6 +658,8 @@
       <div class="back-to-top">
         <i class="fa fa-arrow-up"></i>
         
+          <span id="scrollpercent"><span>0</span>%</span>
+        
       </div>
     
     
@@ -786,7 +813,17 @@
 
   
 
+
+<!-- 雪花特效 -->
+<script type="text/javascript">
+  var windowWidth = $(window).width();
+  if (windowWidth > 480) {
+    document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+  }
+</script>
+
   <!-- 代码块复制功能 -->
+
 <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
 <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
 </body>
