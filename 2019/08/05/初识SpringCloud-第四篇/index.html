@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g5ov4e4nwlj30go0axzlb.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g5ov4ixdd5j30go0axmyd.jpg">
-<meta property="og:updated_time" content="2019-08-06T08:24:44.057Z">
+<meta property="og:updated_time" content="2019-08-07T09:42:12.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识SpringCloud|第四篇|Hystrix">
 <meta name="twitter:description" content="​    在微服务架构中，业务被分为一个个微小的服务，服务和服务之间可以相互调用(RPC)，为保证高可用性，单个服务通常会集群部署，由于网络或者其他众多原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会陷入线程阻塞的状态，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，">
@@ -333,14 +333,14 @@
         <p>​    在微服务架构中，业务被分为一个个微小的服务，服务和服务之间可以相互调用(RPC)，为保证高可用性，单个服务通常会集群部署，由于网络或者其他众多原因，服务并不能保证100%可用，如果单个服务出现问题，调用这个服务就会陷入线程阻塞的状态，此时若有大量的请求涌入，Servlet容器的线程资源会被消耗完毕，导致服务瘫痪。服务与服务之间的依赖性，故障会传播，会对整个微服务系统造成灾难性的严重后果，这就是服务故障的“雪崩”效应。为了解决这个问题，业界提出了”断路器”模型。</p>
 <a id="more"></a>
 
-<h3 id="一、断路器简介"><a href="#一、断路器简介" class="headerlink" title="一、断路器简介"></a>一、断路器简介</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Netflix has created a library called Hystrix that implements the circuit breaker pattern. In a microservice architecture it is common to have multiple layers of service calls.</span><br><span class="line"> ----摘自官网</span><br></pre></td></tr></table></figure>
+<h3 id="断路器简介"><a href="#断路器简介" class="headerlink" title="断路器简介"></a>断路器简介</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Netflix has created a library called Hystrix that implements the circuit breaker pattern. In a microservice architecture it is common to have multiple layers of service calls.</span><br><span class="line"> ----摘自官网</span><br></pre></td></tr></table></figure>
 
 <p>​    Netflix开源了Hystrix组件，实现了断路器模式，SpringCloud对这一组件进行了整合。 在微服务架构中，一个请求需要调用多个服务是非常常见的，如下图：</p>
 <p><img src="http://wx4.sinaimg.cn/mw690/007dV4f5ly1g5ov4e4nwlj30go0axzlb.jpg" alt="img"></p>
 <p>​    较底层的服务如果出现故障，会导致连锁故障。当对特定的服务的调用的不可用达到一个阀值（Hystric 是5秒20次） 断路器将会被打开。</p>
 <p><img src="http://wx1.sinaimg.cn/mw690/007dV4f5ly1g5ov4ixdd5j30go0axmyd.jpg" alt="img"></p>
-<h3 id="二、准备工作"><a href="#二、准备工作" class="headerlink" title="二、准备工作"></a>二、准备工作</h3><p>​    这篇文章基于上一篇文章的工程，首先启动上一篇文章的工程，启动eureka-server 工程；启动eureka-client工程，它的端口为8763。</p>
-<h3 id="三、在Ribbon使用熔断器"><a href="#三、在Ribbon使用熔断器" class="headerlink" title="三、在Ribbon使用熔断器"></a>三、在Ribbon使用熔断器</h3><p>​    改进eureka-ribbon工程，在pom文件中加入Hystrix依赖。</p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>​    这篇文章基于上一篇文章的工程，首先启动上一篇文章的工程，启动eureka-server 工程；启动eureka-client工程，它的端口为8763。</p>
+<h3 id="在Ribbon使用熔断器"><a href="#在Ribbon使用熔断器" class="headerlink" title="在Ribbon使用熔断器"></a>在Ribbon使用熔断器</h3><p>​    改进eureka-ribbon工程，在pom文件中加入Hystrix依赖。</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>​    工程启动类Application上添加注解@EnableHystrix注解开启Hystrix。</p>
@@ -356,7 +356,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hi kn error</span><br></pre></td></tr></table></figure>
 
 <p>​    这就说明当 eureka-client 工程不可用的时候，eureka-ribbon调用 eureka-client的API接口时，会执行快速失败，直接返回一组字符串，而不是等待响应超时，这很好的控制了容器的线程阻塞。</p>
-<h3 id="四、Feign中使用断路器"><a href="#四、Feign中使用断路器" class="headerlink" title="四、Feign中使用断路器"></a>四、Feign中使用断路器</h3><p>​    Feign是自带断路器的，在D版本的Spring Cloud之后，它没有默认打开。需要在配置文件中配置打开它，在配置文件加以下代码：</p>
+<h3 id="Feign中使用断路器"><a href="#Feign中使用断路器" class="headerlink" title="Feign中使用断路器"></a>Feign中使用断路器</h3><p>​    Feign是自带断路器的，在D版本的Spring Cloud之后，它没有默认打开。需要在配置文件中配置打开它，在配置文件加以下代码：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line"><span class="attr">  hystrix:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
 <p>​    这里我输入hystrix，自动的输出了：</p>
@@ -376,7 +376,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorry,error,kn</span><br></pre></td></tr></table></figure>
 
 <p>​    这说明断路器起到了作用。</p>
-<h3 id="五、结尾"><a href="#五、结尾" class="headerlink" title="五、结尾"></a>五、结尾</h3><p>​    feign开启熔断之后，FeignServerHystrix会要重写接口的所有方法，而Ribbon似乎更加灵活，只需要在注解上增加fallbackmethod指定方法即可，现在看来两者各有好处。一步步的解决Bug运行成功时令人开心的，还式要继续努力啊。</p>
+<h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><p>​    feign开启熔断之后，FeignServerHystrix会要重写接口的所有方法，而Ribbon似乎更加灵活，只需要在注解上增加fallbackmethod指定方法即可，现在看来两者各有好处。一步步的解决Bug运行成功时令人开心的，还式要继续努力啊。</p>
 <p>​    最后附上大牛原文链接：<a href="http://blog.csdn.net/forezp/article/details/81040990" target="_blank" rel="noopener">http://blog.csdn.net/forezp/article/details/81040990</a></p>
 
       
@@ -389,24 +389,6 @@
     
     
     
-    
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者：</strong>
-    Kn
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2019/08/05/初识SpringCloud-第四篇/" title="初识SpringCloud|第四篇|Hystrix">http://yoursite.com/2019/08/05/初识SpringCloud-第四篇/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>
-    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-
-      </div>
     
     
     <footer class="post-footer">
@@ -599,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、断路器简介"><span class="nav-number">1.</span> <span class="nav-text">一、断路器简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、准备工作"><span class="nav-number">2.</span> <span class="nav-text">二、准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、在Ribbon使用熔断器"><span class="nav-number">3.</span> <span class="nav-text">三、在Ribbon使用熔断器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Feign中使用断路器"><span class="nav-number">4.</span> <span class="nav-text">四、Feign中使用断路器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、结尾"><span class="nav-number">5.</span> <span class="nav-text">五、结尾</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#断路器简介"><span class="nav-number">1.</span> <span class="nav-text">断路器简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在Ribbon使用熔断器"><span class="nav-number">3.</span> <span class="nav-text">在Ribbon使用熔断器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Feign中使用断路器"><span class="nav-number">4.</span> <span class="nav-text">Feign中使用断路器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结尾"><span class="nav-number">5.</span> <span class="nav-text">结尾</span></a></li></ol></div>
             
 
           </div>
@@ -813,6 +795,9 @@
 
   
 
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
 
 <!-- 雪花特效 -->
 <script type="text/javascript">
@@ -822,9 +807,5 @@
   }
 </script>
 
-  <!-- 代码块复制功能 -->
-
-<script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
-<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
 </body>
 </html>
